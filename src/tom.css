@@ -1,0 +1,16 @@
+/* *** Styles that I added *** */
+.SwitchLabel {
+  color: #b318f0;
+}
+
+span span {
+  font-weight: bold;
+}
+
+.spacing {
+  margin: 1em;
+}
+
+.hideHeader {
+  display: none;
+}
