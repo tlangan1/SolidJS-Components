@@ -1,5 +1,5 @@
 /* *** Styles that I added *** */
-.SwitchLabel {
+.colorLabel {
   color: #b318f0;
 }
 
@@ -13,4 +13,10 @@ span span {
 
 .hideHeader {
   display: none;
+}
+
+.drawBorderWithPaddingAndMargin {
+  border: solid;
+  margin: 0.5em;
+  padding: 0.5em;
 }

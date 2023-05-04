@@ -1,20 +1,16 @@
 import logo from "./logo.svg";
 import styles from "./App.module.css";
-import {
-  createMemo,
-  createSignal,
-  ErrorBoundary,
-  Match,
-  Show,
-  Switch,
-} from "solid-js";
-import { Dynamic } from "solid-js/web";
+import { createMemo, createSignal, ErrorBoundary } from "solid-js";
+
+import { SwitchComponent } from "./SwitchComponent";
+import { ShowComponent } from "./ShowComponent";
+import { DynamicComponent } from "./DynamicComponent";
 
 import "./tom.css";
 
 function App() {
-  var [condition, setCondition] = createSignal(false);
-  var toggle = () => setCondition(!condition());
+  var [flag, setFlag] = createSignal(false);
+  var toggle = () => setFlag(!flag());
   var [keyedValue, setKeyedValue] = createSignal("Tom");
 
   var [hideHeader, setHideHeader] = createSignal(true);
@@ -27,19 +23,10 @@ function App() {
   var calculatedStatement = createMemo(() => (
     <span>
       {" "}
-      condition is <span>{condition().toString()}</span> and keyedValue is{" "}
+      condition is <span>{flag().toString()}</span> and keyedValue is{" "}
       <span>{keyedValue()}</span>{" "}
     </span>
   ));
-
-  function createStatementForDynamic(loopy) {
-    return (
-      <span>
-        condition is <span>{condition().toString()}</span> and keyedValue is{" "}
-        <span>{keyedValue()}</span> {loopy.x}
-      </span>
-    );
-  }
 
   var Broken = () => {
     throw new Error("Oh No!");
@@ -47,72 +34,12 @@ function App() {
   };
 
   var MemoComp = () => (
-    <p class="SwitchLabel">
-      Created with use of memo in a Memo Component: {calculatedStatement}
+    <p class="colorLabel drawBorderWithPaddingAndMargin">
+      <strong>Created with use of memo in a Memo Component:</strong>{" "}
+      {calculatedStatement}
     </p>
   );
 
-  var SwitchComp = () => (
-    <p>
-      Created using a Switch Component:&nbsp
-      <Switch
-        fallback={
-          <span class="SwitchLabel">
-            condition is <span>false</span> and keyedValue is <span>Jim</span>
-          </span>
-        }
-      >
-        <Match when={condition() && keyedValue() == "Tom"}>
-          <span>
-            condition is <span>true</span> and keyedValue is <span>Tom</span>
-          </span>
-        </Match>
-        <Match when={condition() && keyedValue() == "Jim"}>
-          <span class="SwitchLabel">
-            condition is <span>true</span> and keyedValue is <span>Jim</span>
-          </span>
-        </Match>
-        <Match when={!condition() && keyedValue() == "Tom"}>
-          <span>
-            condition is <span>false</span> and keyedValue is <span>Tom</span>
-          </span>
-        </Match>
-      </Switch>
-    </p>
-  );
-
-  var DynamicComp = () => (
-    <p>
-      Created using the Dynamic component:&nbsp
-      <Dynamic
-        component={createStatementForDynamic}
-        x="Langan"
-        children={"Hello!"}
-      ></Dynamic>
-    </p>
-  );
-
-  var ShowComp1 = (props) => (
-    <>
-      {" "}
-      <p>
-        A Show Component that is {props.keyed}: &nbsp
-        <Show
-          when={props.test_value()}
-          fallback={
-            <span>
-              The {props.value_name} is <span>{props.show_value}</span>
-            </span>
-          }
-        >
-          <span>
-            The {props.value_name} is <span>{props.show_value}</span>
-          </span>
-        </Show>
-      </p>
-      <button onclick={props.toggle}>Toggle {props.value_name}</button>
-    </>
-  );
   /*****************************************/
   /* *** The App component starts here *** */
   /*****************************************/
@@ -135,26 +62,27 @@ function App() {
         ></a>
         Learn Solid
       </header>
+      <SwitchComponent />
       <MemoComp />
-      <SwitchComp />
-      <DynamicComp />
-      <ShowComp1
+      <DynamicComponent flag={flag()} keyedValue={keyedValue()} />
+      <ShowComponent
         keyed="not keyed"
-        test_value={condition}
+        predicate={flag}
         value_name="condition"
         toggle={toggle}
-        show_value={condition() ? "true" : "false"}
+        show_value={flag() ? "true" : "false"}
       />
-      <ShowComp1
+      <ShowComponent
         keyed="keyed!"
-        test_value={() => keyedValue == "Tom"}
+        predicate={() => keyedValue == "Tom"}
         value_name="keyedValue"
         toggle={changeName}
         show_value={keyedValue()}
       />
       <ErrorBoundary
         fallback={(err, reset = () => alert("Clicked")) => (
-          <div class="spacing" onClick={reset}>
+          <div class="drawBorderWithPaddingAndMargin" onClick={reset}>
+            <strong>An ErrorBoundary component:&nbsp</strong>
             Error: {err.toString()}
           </div>
         )}
