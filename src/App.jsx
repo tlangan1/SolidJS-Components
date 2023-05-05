@@ -1,44 +1,20 @@
 import logo from "./logo.svg";
 import styles from "./App.module.css";
-import { createMemo, createSignal, ErrorBoundary } from "solid-js";
+import { createSignal } from "solid-js";
 
 import { SwitchComponent } from "./SwitchComponent";
-import { ShowComponent } from "./ShowComponent";
-import { DynamicComponent } from "./DynamicComponent";
 
 import "./tom.css";
+import { ComponentGroup1 } from "./ComponentGroup1";
 
 function App() {
-  var [flag, setFlag] = createSignal(false);
-  var toggle = () => setFlag(!flag());
-  var [keyedValue, setKeyedValue] = createSignal("Tom");
-
   var [hideHeader, setHideHeader] = createSignal(true);
-
-  function changeName() {
-    if (keyedValue() == "Tom") setKeyedValue("Jim");
-    else setKeyedValue("Tom");
-  }
-
-  var calculatedStatement = createMemo(() => (
-    <span>
-      {" "}
-      condition is <span>{flag().toString()}</span> and keyedValue is{" "}
-      <span>{keyedValue()}</span>{" "}
-    </span>
-  ));
-
-  var Broken = () => {
-    throw new Error("Oh No!");
-    return "Never getting here";
-  };
-
-  var MemoComp = () => (
-    <p class="colorLabel drawBorderWithPaddingAndMargin">
-      <strong>Created with use of memo in a Memo Component:</strong>{" "}
-      {calculatedStatement}
-    </p>
-  );
+  var [codeGroups, setCodeGroups] = createSignal([
+    "Component Group 1",
+    "Component Group 2",
+  ]);
+  var [selectedCodeGroup, setSelectedCodeGroup] = createSignal(codeGroups()[0]);
+  // document.getElementById("code_group").value;
 
   /*****************************************/
   /* *** The App component starts here *** */
@@ -62,34 +38,19 @@ function App() {
         ></a>
         Learn Solid
       </header>
-      <SwitchComponent />
-      <MemoComp />
-      <DynamicComponent flag={flag()} keyedValue={keyedValue()} />
-      <ShowComponent
-        keyed="not keyed"
-        predicate={flag}
-        value_name="condition"
-        toggle={toggle}
-        show_value={flag() ? "true" : "false"}
-      />
-      <ShowComponent
-        keyed="keyed!"
-        predicate={() => keyedValue == "Tom"}
-        value_name="keyedValue"
-        toggle={changeName}
-        show_value={keyedValue()}
-      />
-      <ErrorBoundary
-        fallback={(err, reset = () => alert("Clicked")) => (
-          <div class="drawBorderWithPaddingAndMargin" onClick={reset}>
-            <strong>An ErrorBoundary component:&nbsp</strong>
-            Error: {err.toString()}
-          </div>
-        )}
+      <select
+        id="code_group"
+        onChange={() =>
+          setSelectedCodeGroup(document.getElementById("code_group").value)
+        }
       >
-        {" "}
-        <Broken />
-      </ErrorBoundary>
+        <For each={codeGroups()}>{(item) => <option>{item}</option>}</For>
+      </select>
+      <Switch fallback={<p>Oops! I must not have considered all the cases.</p>}>
+        <Match when={selectedCodeGroup() == "Component Group 1"}>
+          <ComponentGroup1 />
+        </Match>
+      </Switch>
     </div>
   );
 }

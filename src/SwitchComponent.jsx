@@ -2,11 +2,11 @@
 
 import { createSignal, Match, Switch } from "solid-js";
 
-export function SwitchComponent() {
+export function SwitchComponent(props) {
   var [randomString, setRandomString] = createSignal("");
 
   function updateInput() {
-    setRandomString(document.getElementById("random_string").value);
+    setRandomString(document.getElementById(props.name).value);
   }
 
   return (
@@ -16,8 +16,8 @@ export function SwitchComponent() {
       </div>
       <input
         type="text"
-        name="random_string"
-        id="random_string"
+        name={props.name}
+        id={props.name}
         value={randomString()}
         onInput={updateInput}
       />
