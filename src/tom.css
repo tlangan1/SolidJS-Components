@@ -20,3 +20,7 @@ span span {
   margin: 0.5em;
   padding: 0.5em;
 }
+
+.center-content {
+    text-align: center;
+}

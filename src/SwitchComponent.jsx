@@ -11,16 +11,18 @@ export function SwitchComponent(props) {
 
   return (
     <div class="switch_component drawBorderWithPaddingAndMargin">
-      <div>
-        <strong>Switch Component</strong>
+      <div class="center-content">
+        <p>
+          <strong>Switch Component</strong>
+        </p>
+        <input
+          type="text"
+          name={props.name}
+          id={props.name}
+          value={randomString()}
+          onInput={updateInput}
+        />
       </div>
-      <input
-        type="text"
-        name={props.name}
-        id={props.name}
-        value={randomString()}
-        onInput={updateInput}
-      />
       <p>
         <Switch fallback="Enter some text in the text box above and see what happens...">
           <Match when={randomString().length == 1}>

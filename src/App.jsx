@@ -5,12 +5,17 @@ import { createMemo, createSignal } from "solid-js";
 import "./tom.css";
 import { ComponentGroup1 } from "./ComponentGroup1";
 import { ComponentGroup2 } from "./ComponentGroup2";
+import { ComponentGroup3 } from "./ComponentGroup3";
 import { ForCompWithIndex } from "./ForCompWithIndex";
 
 function App() {
   var [hideHeader, setHideHeader] = createSignal(true);
 
-  var [codeGroup] = createSignal(["Component Group 1", "Component Group 2"]);
+  var [codeGroup] = createSignal([
+    "Component Group 1",
+    "Component Group 2",
+    "Component Group 3",
+  ]);
 
   var [selectedIndex, setSelectedIndex] = createSignal(0);
 
@@ -42,7 +47,7 @@ function App() {
           setSelectedIndex(document.getElementById("code_group").value);
         }}
       >
-        <ForCompWithIndex list={codeGroup()} />
+        <ForCompWithIndex list={codeGroup()} type="option" />
       </select>
       <Switch fallback={<p>Oops! I must not have considered all the cases.</p>}>
         {/* <Match when={testOption()}> */}
@@ -51,6 +56,9 @@ function App() {
         </Match>
         <Match when={codeGroup()[selectedIndex()] == "Component Group 2"}>
           <ComponentGroup2 />
+        </Match>
+        <Match when={codeGroup()[selectedIndex()] == "Component Group 3"}>
+          <ComponentGroup3 />
         </Match>
       </Switch>
     </div>

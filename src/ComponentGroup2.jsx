@@ -2,6 +2,7 @@ import { createSignal, createMemo } from "solid-js";
 
 import { IndexComp } from "./IndexComp";
 import { ForCompWithIndex } from "./ForCompWithIndex";
+import { ComponentUsingPropsChildren } from "./ComponentUsingPropsChildren";
 
 export function ComponentGroup2(props) {
   var [forList, setForList] = createSignal([
@@ -62,22 +63,31 @@ export function ComponentGroup2(props) {
           and watch what happens to understand what SolidJS is doing. It is very
           efficient!
         </p>
-        <button class="spacing" onclick={() => reverseLists()}>
-          Reverse List
-        </button>
-        <button class="spacing" onclick={() => changeLists()}>
-          Change List
-        </button>
-        <button class="spacing" onclick={() => addItemToLists()}>
-          Add Item
-        </button>
+        <div class="center-content">
+          <button class="spacing" onclick={() => reverseLists()}>
+            Reverse List
+          </button>
+          <button class="spacing" onclick={() => changeLists()}>
+            Change List
+          </button>
+          <button class="spacing" onclick={() => addItemToLists()}>
+            Add Item
+          </button>
+        </div>
       </div>
       <ul>
-        <ForCompWithIndex list={currentForList()} />
+        <ForCompWithIndex list={currentForList()} type="li" />
       </ul>
       <ul>
-        <IndexComp list={currentIndexList()} />
+        <IndexComp list={currentIndexList()} type="li" />
       </ul>
+      <ComponentUsingPropsChildren>
+        {" "}
+        <p>
+          Here is a child paragraph supplied by the parent element as inner
+          content.
+        </p>
+      </ComponentUsingPropsChildren>
     </>
   );
 }

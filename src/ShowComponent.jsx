@@ -18,7 +18,9 @@ export function ShowComponent(props) {
           </span>
         </Show>
       </p>
-      <button onclick={props.toggle}>Toggle {props.value_name}</button>
+      <div class="center-content">
+        <button onclick={props.toggle}>Toggle {props.value_name}</button>
+      </div>
     </div>
   );
 }

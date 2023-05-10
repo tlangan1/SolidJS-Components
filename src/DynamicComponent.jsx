@@ -13,11 +13,7 @@ export function DynamicComponent(props) {
   return (
     <p class="drawBorderWithPaddingAndMargin">
       <strong>Created using the Dynamic component:&nbsp</strong>
-      <Dynamic
-        component={createStatementForDynamic}
-        x="Langan"
-        children={"Hello!"}
-      ></Dynamic>
+      <Dynamic component={createStatementForDynamic} x="Langan"></Dynamic>
     </p>
   );
 }
