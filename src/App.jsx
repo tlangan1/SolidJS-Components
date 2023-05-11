@@ -1,23 +1,23 @@
-import logo from "./logo.svg";
 import styles from "./App.module.css";
-import { createMemo, createSignal } from "solid-js";
+import { createSignal } from "solid-js";
 
 import "./tom.css";
+import { Introduction } from "./Introduction";
 import { ComponentGroup1 } from "./ComponentGroup1";
 import { ComponentGroup2 } from "./ComponentGroup2";
-import { ComponentGroup3 } from "./ComponentGroup3";
-import { ComponentGroup4 } from "./ComponentGroup4";
+import { MergeAndSplitProps } from "./MergeAndSplitProps";
+import { Children } from "./Children";
 import { ForCompWithIndex } from "./ForCompWithIndex";
 
 function App() {
   var [hideHeader, setHideHeader] = createSignal(true);
 
   var [codeGroup] = createSignal([
-    "Header",
+    "Introduction",
     "Component Group 1",
     "Component Group 2",
-    "Component Group 3",
-    "Component Group 4",
+    "Merge And Split Props",
+    "Children",
   ]);
 
   var [selectedIndex, setSelectedIndex] = createSignal(0);
@@ -38,20 +38,8 @@ function App() {
         <ForCompWithIndex list={codeGroup()} type="option" />
       </select>
       <Switch fallback={<p>Oops! I must not have considered all the cases.</p>}>
-        <Match when={codeGroup()[selectedIndex()] == "Header"}>
-          <header class="center-content">
-            <img src={logo} class={styles.logo} alt="logo" />
-            <p>
-              Edit <code>src/App.jsx</code> and save to reload.
-            </p>
-            <a
-              class={styles.link}
-              href="https://github.com/solidjs/solid"
-              target="_blank"
-              rel="noopener noreferrer"
-            ></a>
-            Learn Solid
-          </header>
+        <Match when={codeGroup()[selectedIndex()] == "Introduction"}>
+          <Introduction />
         </Match>
         <Match when={codeGroup()[selectedIndex()] == "Component Group 1"}>
           <ComponentGroup1 />
@@ -59,11 +47,11 @@ function App() {
         <Match when={codeGroup()[selectedIndex()] == "Component Group 2"}>
           <ComponentGroup2 />
         </Match>
-        <Match when={codeGroup()[selectedIndex()] == "Component Group 3"}>
-          <ComponentGroup3 />
+        <Match when={codeGroup()[selectedIndex()] == "Merge And Split Props"}>
+          <MergeAndSplitProps />
         </Match>
-        <Match when={codeGroup()[selectedIndex()] == "Component Group 4"}>
-          <ComponentGroup4 />
+        <Match when={codeGroup()[selectedIndex()] == "Children"}>
+          <Children />
         </Match>
       </Switch>
     </div>

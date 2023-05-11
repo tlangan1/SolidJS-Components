@@ -1,8 +1,7 @@
-import { ChildrenComp } from "./ChildrenComp";
 import { MergePropsComp } from "./MergePropsComp";
 import { SplitPropsComp } from "./SplitPropsComp";
 
-export function ComponentGroup3() {
+export function MergeAndSplitProps() {
   return (
     <>
       <MergePropsComp prop1="supplied prop1" />

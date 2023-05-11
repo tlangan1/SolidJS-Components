@@ -1,7 +1,7 @@
 import { createSignal } from "solid-js";
 import { ChildrenComp } from "./ChildrenComp";
 
-export function ComponentGroup4() {
+export function Children() {
   var [count, setCount] = createSignal(0);
   return (
     <>
