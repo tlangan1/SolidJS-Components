@@ -11,10 +11,6 @@ span span {
   margin: 1em;
 }
 
-.hideHeader {
-  display: none;
-}
-
 .drawBorderWithPaddingAndMargin {
   border: solid;
   margin: 0.5em;
@@ -22,5 +18,9 @@ span span {
 }
 
 .center-content {
-    text-align: center;
+  text-align: center;
+}
+
+.bright-background {
+  background-color: lavender;
 }

@@ -9,10 +9,10 @@ export function MergePropsComp(props) {
         <strong>A Merge Props Component: &nbsp</strong>
       </div>
       <p>
-        The example below illustrates how the mergeProps function merges the
+        This example illustrates how the mergeProps function merges the
         arguments that are passed to it. The properties supplied in the
         arguments are appended to the resultant object in the reverse order in
-        which they are supplied in the function call. If a property is
+        which the arguments are supplied in the function call. If a property is
         encountered more than once the first one appended wins. This function
         takes any number of arguments.
       </p>

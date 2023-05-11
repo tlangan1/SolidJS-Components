@@ -1,3 +1,4 @@
+import { ChildrenComp } from "./ChildrenComp";
 import { MergePropsComp } from "./MergePropsComp";
 import { SplitPropsComp } from "./SplitPropsComp";
 
