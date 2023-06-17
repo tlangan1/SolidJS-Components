@@ -2,12 +2,15 @@ import styles from "./App.module.css";
 import { createSignal } from "solid-js";
 
 import "./tom.css";
+import { ForCompWithIndex } from "./ForCompWithIndex";
+
 import { Introduction } from "./Introduction";
 import { ComponentGroup1 } from "./ComponentGroup1";
 import { ComponentGroup2 } from "./ComponentGroup2";
 import { MergeAndSplitProps } from "./MergeAndSplitProps";
 import { Children } from "./Children";
-import { ForCompWithIndex } from "./ForCompWithIndex";
+import { LifeCycle } from "./LifeCycle";
+import { CreateResourceComp } from "./CreateResourceComp";
 
 function App() {
   var [hideHeader, setHideHeader] = createSignal(true);
@@ -18,6 +21,8 @@ function App() {
     "Component Group 2",
     "Merge And Split Props",
     "Children",
+    "Life Cycle",
+    "Create Resource",
   ]);
 
   var [selectedIndex, setSelectedIndex] = createSignal(0);
@@ -52,6 +57,12 @@ function App() {
         </Match>
         <Match when={codeGroup()[selectedIndex()] == "Children"}>
           <Children />
+        </Match>
+        <Match when={codeGroup()[selectedIndex()] == "Life Cycle"}>
+          <LifeCycle />
+        </Match>
+        <Match when={codeGroup()[selectedIndex()] == "Create Resource"}>
+          <CreateResourceComp />
         </Match>
       </Switch>
     </div>
